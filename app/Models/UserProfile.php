@@ -40,7 +40,9 @@ class UserProfile extends Model
     // Accessor submitted assignment avg mark
     public function getAssignmentAverageMarkAttribute()
     {
-        return round($this->submitted_assignments()->avg('gained_mark'), 2);
+        $avg = $this->submitted_assignments()->avg('gained_mark');
+
+        return $avg !== null ? round($avg, 2) : 0;
     }
 
     // Accessor attendance avg mark
