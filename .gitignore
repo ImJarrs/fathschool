@@ -58,3 +58,6 @@ Thumbs.db
 # Large files
 app.zip
 *.zip
+
+# Ignore credentials
+firebase-auth.json
