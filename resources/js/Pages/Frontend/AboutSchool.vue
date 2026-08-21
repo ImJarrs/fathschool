@@ -8,9 +8,9 @@
         <p>
           SMKN 1 Kawali merupakan sebuah SMK Negeri di kawasan Ciamis Utara yang mulai berdiri tahun 2004. yang awalnya memiliki 
           1 Kompetensi Keahlian yaitu Teknik Mesin Otomotif(TMO) sekrang sudah berkembang menjadi 7 Kompetensi Keahlian 
-          yaitu: Teknik Kendaraan Ringan Otomotif (TKRO), Teknik Komputer dan Jaringan (TKJ), Rekayasa Perangkat Lunak (RPL), 
-          Desain Pemodelan dan Informasi Bangunan (DPIB), Otomatisasi dan Tata Kelola Perkantoran (OTKP), Akuntansi Keuangan da 
-          Lembaga (AKL), dan Seni Karawitan Sunda (SKS), dengan jumlah siswa yang awalnya hanya 18 siswa sekarang sudah mencapai 
+          yaitu: Teknik Otomotif (TO), Teknik Jaringan Komputer dan Telekomunikasi (TJKT), Pengembangan Perangkat Lunak dan Gim (PPLG), 
+          Desain Pemodelan dan Informasi Bangunan (DPIB), Manajemen Perkantoran (MP), Akuntansi (AK), dan Seni Pertunjukan (SP), 
+          dengan jumlah siswa yang awalnya hanya 18 siswa sekarang sudah mencapai 
           1600 lebih Siswa dan Siswi SMKN 1 Kawali yang merupakan Siswa dan Siswi yang berada di Ciamis Utara bahkan dari Luar Provinsi 
           Jawa Barat.
         </p>
@@ -82,12 +82,12 @@ export default {
     return {
       items: [
         { id: 1, date: '1 Oktober 2004', description: 'Pembukaan SMK', icon: '/images/flag.png' },
-        { id: 2, date: '12 Oktober 2009', description: 'Pembukaan Jurusan RPL', icon: '/images/monitor.png' },
-        { id: 3, date: '12 Oktober 2015', description: 'Pembukaan Jurusan AKL', icon: '/images/payment.png' },
-        { id: 4, date: '13 Oktober 2003', description: 'Pembukaan Jurusan TKJ', icon: '/images/piston.png' },
-        { id: 5, date: '16 Oktober 2017', description: 'Pembukaan Jurusan SKS', icon: '/images/angklung.png' },
-        { id: 6, date: '30 Desember 2003', description: 'Pembukaan Jurusan TKJ', icon: '/images/transmitter.png' },
-        { id: 7, date: '14 Oktober 2013', description: 'Pembukaan Jurusan OTKP', icon: '/images/desktop.png' },
+        { id: 2, date: '12 Oktober 2009', description: 'Pembukaan Jurusan PPLG', icon: '/images/monitor.png' },
+        { id: 3, date: '12 Oktober 2015', description: 'Pembukaan Jurusan AK', icon: '/images/payment.png' },
+        { id: 4, date: '13 Oktober 2003', description: 'Pembukaan Jurusan TJKT', icon: '/images/piston.png' },
+        { id: 5, date: '16 Oktober 2017', description: 'Pembukaan Jurusan SP', icon: '/images/angklung.png' },
+        { id: 6, date: '30 Desember 2003', description: 'Pembukaan Jurusan TJKT', icon: '/images/transmitter.png' },
+        { id: 7, date: '14 Oktober 2013', description: 'Pembukaan Jurusan MP', icon: '/images/desktop.png' },
         { id: 8, date: '12 Oktober 2015', description: 'Pembukaan Jurusan DPIB', icon: '/images/design.png' }
       ]
     }

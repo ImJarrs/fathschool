@@ -150,6 +150,15 @@ class AlumniController extends Controller
                     'status' => 'active',
                 ]);
 
+                // Remove student from class XII courses so they no longer appear in student lists
+                // (keep X/XI course enrollments intact)
+                $student->courses()
+                    ->whereHas('course', function ($q) {
+                        $q->where('name', 'like', 'XII%')
+                          ->orWhere('name', 'like', 'XII %');
+                    })
+                    ->delete();
+
                 $created++;
             }
 
@@ -174,6 +183,42 @@ class AlumniController extends Controller
     {
         abort_if(! userCan('admission.destroy'), 403);
 
+        // Restore the user's course enrollment so they appear back in student lists
+        if ($alumni->user_id) {
+            $user = User::find($alumni->user_id);
+            if ($user) {
+                // Map jurusan abbreviation to study_program_id
+                $studyProgramIds = [
+                    'PPLG' => 2,  // Pengembangan Perangkat Lunak dan Gim
+                    'TJKT' => 4,  // Teknik Jaringan Komputer dan Telekomunikasi
+                    'DPIB' => 6,  // Design Permodelan dan Informasi Bangunan
+                    'SP' => 7,    // Seni Pertunjukan
+                    'MP' => 8,    // Manajemen Perkantoran
+                    'TO' => 9,    // Teknik Otomotif
+                    'AK' => 10,   // Akuntansi
+                ];
+
+                $studyProgramId = $studyProgramIds[$alumni->jurusan] ?? null;
+
+                $course = null;
+                if ($studyProgramId) {
+                    $course = Course::where('study_program_id', $studyProgramId)
+                        ->where(function ($q) {
+                            $q->where('name', 'like', 'XII%')
+                              ->orWhere('name', 'like', 'XII %');
+                        })
+                        ->orderBy('id')
+                        ->first();
+                }
+
+                if ($course && ! $user->courses()->where('course_id', $course->id)->exists()) {
+                    $user->courses()->create([
+                        'course_id' => $course->id,
+                    ]);
+                }
+            }
+        }
+
         $alumni->delete();
 
         $this->flashSuccess('Alumni berhasil dihapus.');
@@ -182,22 +227,27 @@ class AlumniController extends Controller
     }
 
     /**
-     * Extract jurusan (major) from the student's class 12 course name.
+     * Extract jurusan (major) from the student's course name.
+     * Handles course names like "XII PPLG 1", "X PPLG 1", "XI AK 2", etc.
      */
     protected function extractJurusan(User $student)
     {
+        // Prioritize class XII course, fallback to any course (X/XI/XII)
         $course = $student->courses->first(function ($uc) {
-            if ($uc->course && str_starts_with(strtoupper($uc->course->name), 'XII')) {
-                return true;
-            }
-            return false;
+            return $uc->course && str_starts_with(strtoupper($uc->course->name), 'XII');
         });
+
+        if (! $course) {
+            $course = $student->courses->first(function ($uc) {
+                return $uc->course && $uc->course->name;
+            });
+        }
 
         if ($course && $course->course) {
             $name = $course->course->name;
-            // Example: "XII RPL 1" -> "RPL"
+            // Example: "XII PPLG 1" -> "PPLG", "X AK 2" -> "AK", "XI SP 1" -> "SP"
             $parts = explode(' ', $name);
-            array_shift($parts); // remove "XII"
+            array_shift($parts); // remove "XII", "X", or "XI"
             // Remove trailing number if present
             $parts = array_filter($parts, function ($part) {
                 return !is_numeric($part);
