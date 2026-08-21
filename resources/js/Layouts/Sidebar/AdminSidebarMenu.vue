@@ -22,24 +22,25 @@
             </div>
         </a>
         <Transition>
-            <ul class="ml-4" v-if="route().current('departments.*')
+            <ul class="ml-4" 
+                v-if="route().current('departments.*')
                 ? (list = true)
                 : list || route().current('study_programs.*')
                 ? (list = true)
                 : list || route().current('course.*')
-                    ? (list = true)
-                    : list || route().current('subjects.*')
-                        ? (list = true)
-                        : list || route().current('exam.*')
-                            ? (list = true)
-                            : list || route().current('grades.*')
-                                ? (list = true)
-                                : list || route().current('result.*')
-                                    ? (list = true)
-                                    : list || route().current('routine.*')
-                                        ? (list = true)
-                                        : list
-                ">
+                ? (list = true)
+                : list || route().current('subjects.*')
+                ? (list = true)
+                : list || route().current('exam.*')
+                ? (list = true)
+                : list || route().current('grades.*')
+                ? (list = true)
+                : list || route().current('result.*')
+                ? (list = true)
+                : list || route().current('routine.*')
+                ? (list = true)
+                : list
+            ">
                  <li>
                     <NavLink class="mt-1" :active="route().current('study_programs.index')" :href="route('study_programs.index')">
                         <list-icon />
@@ -181,16 +182,23 @@
         </NavLink>
     </li>
     
-    <!-- <li class="text-xs uppercase mb-2 text-gray-500 pt-6 pl-2">
+    <li class="text-xs uppercase mb-2 text-gray-500 pt-6 pl-2">
         {{ __('Alumni') }}
     </li>
     <li v-if="can('alumni.list') || can('admission.index')" class="alumni_section">
-        <NavLink :href="route('alumni.admission.all')"
-            :active="route().current('alumni.admission.all')">
-            <GraduationCapIcon class="h-5 w-5" />
+        <NavLink :href="route('alumni.index')"
+            :active="route().current('alumni.index')">
+            <AcademicCapIcon class="h-5 w-5" />
             {{ __("All Alumni") }}
         </NavLink>
-    </li> -->
+    </li>
+    <li v-if="can('alumni.list') || can('admission.create')" class="alumni_promote_section">
+        <NavLink :href="route('alumni.create')"
+            :active="route().current('alumni.create')">
+            <ArrowUpIcon class="h-5 w-5" />
+            {{ __("Batch Promote") }}
+        </NavLink>
+    </li>
 
     <li class="text-xs uppercase mb-2 text-gray-500 pt-6 pl-2">
         {{ __('Others') }}

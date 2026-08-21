@@ -159,7 +159,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         });
         // Alumni Routes
         Route::controller(AlumniController::class)->group(function () {
-            Route::get('/all/alumni', 'index')->name('alumni.admission.all');
+            Route::get('/all/alumni', 'index')->name('alumni.index');
+            Route::get('/all/alumni/admission/all', 'index')->name('alumni.admission.all');
+            Route::get('/alumni/batch-promote', 'create')->name('alumni.create');
+            Route::post('/alumni/batch-promote', 'store')->name('alumni.store');
+            Route::delete('/alumni/{alumni}', 'destroy')->name('alumni.destroy');
         });
         Route::controller(CourseController::class)->group(function () {
             Route::get('/qr/class', 'getAllClassesWithQrCodes')->name('class.qr.all');
