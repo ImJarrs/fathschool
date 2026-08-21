@@ -169,12 +169,6 @@
             </Link>
         </NavLink>
     </li>
-    <!-- <li v-if="can('student.promotion')" class="promotion_section">
-        <NavLink :href="route('student.promotion')" :active="route().current('student.promotion')">
-            <ArrowUpIcon class="h-5 w-5" />
-            {{ __("Student Promotion") }}
-        </NavLink>
-    </li> -->
     <li v-if="can('admission.form')" class="admission_form_section">
         <NavLink :href="route('form.index')" :active="route().current('form.*')">
             <NewspaperIcon class="h-5 w-5" />
@@ -195,7 +189,7 @@
     <li v-if="can('alumni.list') || can('admission.create')" class="alumni_promote_section">
         <NavLink :href="route('alumni.create')"
             :active="route().current('alumni.create')">
-            <ArrowUpIcon class="h-5 w-5" />
+            <DocumentArrowUpIcon class="h-5 w-5" />
             {{ __("Batch Promote") }}
         </NavLink>
     </li>
@@ -269,7 +263,7 @@ import NavLink from "@/Components/Sidebar/NavLink.vue";
 import { Link } from '@inertiajs/inertia-vue3';
 
 import {
-    AcademicCapIcon, PlusCircleIcon, CurrencyDollarIcon, ArrowUpIcon, CalendarIcon, ChevronDownIcon, EnvelopeIcon, RectangleStackIcon,
+    AcademicCapIcon, PlusCircleIcon, CurrencyDollarIcon, DocumentArrowUpIcon, CalendarIcon, ChevronDownIcon, EnvelopeIcon, RectangleStackIcon,
     ChevronUpIcon, Cog8ToothIcon, DocumentPlusIcon, FlagIcon, QueueListIcon, UserIcon, VideoCameraIcon, SpeakerWaveIcon, HomeIcon, WalletIcon, UsersIcon, NewspaperIcon, QrCodeIcon, ClipboardDocumentListIcon
 
 } from "@heroicons/vue/24/outline";
@@ -287,7 +281,7 @@ export default {
         QueueListIcon,
         UsersIcon,
         EnvelopeIcon,
-        ArrowUpIcon,
+        DocumentArrowUpIcon,
         CurrencyDollarIcon,
         VideoCameraIcon,
         UserIcon,

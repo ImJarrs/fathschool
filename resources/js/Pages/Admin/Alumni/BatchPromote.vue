@@ -10,7 +10,7 @@
 
         <div>
             <page-header class="flex-col sm:flex-row">
-                {{ __('Batch Promote Siswa Kelas 12') }}
+                {{ __('Pelulusan Siswa Kelas 12') }}
                 <template #content>
                     <div class="flex flex-col sm:flex-row gap-4">
                         <global-button :loading="false" @click="selectAll()" type="button" theme="sky">
